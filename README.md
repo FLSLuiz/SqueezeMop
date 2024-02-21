@@ -1,7 +1,7 @@
 - Inspired by 'Code With Stein': https://www.youtube.com/@CodeWithStein/videos
-- footer: https://flowbite.com/docs/components/footer/
-- cart summary: https://mambaui.com/components/shopping-cart
-- checkout form page: https://readymadeui.com/tailwind/ecommerce/checkout-form-page
+- footer insp.: https://flowbite.com/docs/components/footer/
+- cart summary insp.: https://mambaui.com/components/shopping-cart
+- checkout form page insp.: https://readymadeui.com/tailwind/ecommerce/checkout-form-page
 - checkout stripe payment api: https://docs.stripe.com/
 - stripe: https://docs.stripe.com/js
 
