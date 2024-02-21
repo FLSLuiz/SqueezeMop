@@ -1,0 +1,56 @@
+{% extends 'core/index.html' %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto p-6">
+    <h1 class="mb-5 text-3xl font-semibold ">My Account ⚡️</h1>
+    <div class="mb-6">
+        <strong>Name: </strong>{{ request.user.get_full_name }}<br>
+        <strong>Username: </strong>{{ request.user.username }}<br>
+        <strong>Email: </strong>{{ request.user.email }}
+        <br><br>
+        <a href="{% url 'edit_account' %}" class="inline-block px-6 py-3 rounded-xl bg-green-200 text-black font-semibold hover:bg-green-300">Edit</a>
+    </div>
+
+    <hr>
+
+    <h2 class="my-6 text-xl font-semibold">My Orders</h2>
+    {% for order in request.user.orders.all %}
+        <div class="w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
+            <div class="mb-6 font-semibold flex justify-between">
+                <a href="#">Order id: {{ order.id }} </a>
+            </div>
+
+            <div class="mb-6 w-full">
+                {% for item in order.items.all %}
+                    <div class="product mb-6 flex pr-6">
+                        <a href="#" class="w-1/4"> 
+                            <img class="hover:shadow-lg rounded-xl" src="{{ item.product.image.url }}">
+                        </a>
+
+                        <div class="w-3/4 pl-6">
+                            <div class="flex justify-between">
+                                <a href="#" class="font-semibold text-lg">{{ item.product.name }}</a>
+
+                                <p class="mb-6 pt-1 text-gray-400">€ {{ item.get_total_price }}</p>
+                            </div>
+
+                            <hr>
+
+                            <div class="mt-6">
+                                Quantity: {{ item.quantity }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="font-semibold">
+                <p cass="text-lg">Date: {{ order.created_at }}</p>
+                <p cass="text-lg">Total: € {{ order.get_total_price }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

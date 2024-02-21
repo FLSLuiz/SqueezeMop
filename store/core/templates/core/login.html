@@ -1,0 +1,51 @@
+{% extends 'core/index.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+
+<div class="max-w-lg mx-auto flex flex-wrap p-6">
+    <div class="w-full bg-green-100 p-6 rounded-xl">
+        <h1 class="mb-6 flex justify-center items-center text-2xl font-bold">✨ LOG IN ✨</h1>
+
+        <form method="post" action="." class="space-y-3">
+            {% csrf_token %}
+
+            <div>
+                <label class="font-semibold">E-Mail</label>
+                <input type="email" name="email" class="w-full mt-2 py-4 px-4 bg-gray-100 roundex-xl">
+            </div>
+            
+            <div>
+                <label class="font-semibold">Username</label>
+                <input type="text" name="username" class="w-full mt-2 py-4 px-4 bg-gray-100 roundex-xl">
+            </div>
+
+            <div>
+                <label class="font-semibold">Password</label>
+                <input type="password" name="password" class="w-full mt-2 py-4 px-4 bg-gray-100 roundex-xl">
+            </div>    
+            
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="p-3 bg-red-200 text-red-800 rounded-xl">
+                            <p>{{ error|escape }}</p>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    <div class="p-3 bg-red-200 text-red-800 rounded-xl">
+                        <p>{{ error|escape }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="flex justify-center items-center">
+                <button class="py-4 px-6 rounded-xl font-semibold text-black bg-green-400 hover:bg-green-500">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>{% block title %}{% endblock %} | SQUEEZE-N-MOP</title>
+    </head>
+
+    <body>
+        <nav class="border-b border-gray-500">
+            <div class="max-w-6xl mx-auto py-6 px-6 xl:px-0 flex items-center justify-between">
+                <div class="menu-left flex items-center space-x-6">
+                    <a href="{% url 'index' %}" class="py-4 text-lg text-black-500 font-bold">SQUEEZE-N-MOP</a>
+                </div>
+                <div class="menu-center flex items-center space-x-6">
+                    <ul class="flex items-center space-x-6 font-semibold">
+                        <li><a href="{% url 'shop' %}">Shop</a></li>
+                        <li><a href="#">About Us</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Log Out</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="menu-right flex items-center space-x-4">
+                    <a href="{% url 'account' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                        </svg>                          
+                    </a>
+                    <div hx-get="{% url 'hx_menu_cart' %}" hx-trigger="update-menu-cart from:body" hx-swap="innerHTML">
+                        {% include 'cart/menu_cart.html' %}
+                    </div>
+                </div>
+            </div>    
+        </nav>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+
+        <footer class="bg-white dark:bg-gray-700">
+            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+                <div class="md:flex md:justify-between">
+                    <div class="mb-6 md:mb-0">
+                        <a href="#" class="flex items-center">
+                            <span class="self-center text-lg font-semibold whitespace-nowrap dark:text-white">SQUEEZE-N-MOP</span>
+                        </a>
+                        <p class="text-gray-300">© 2024</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                        <div>
+                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Helpful Links</h2>
+                            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                                <li class="mb-4">
+                                    <a href="#" class="hover:underline">Shipping Policy</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:underline">Refund Policy</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+                            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                                <li class="mb-4">
+                                    <a href="#" class="hover:underline ">Tik Tok</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:underline">X (Former Twitter)</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+                            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                                <li class="mb-4">
+                                    <a href="#" class="hover:underline">Privacy Policy</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+        {% block scripts %}
+        
+        {% endblock %}
+    </body>
+</html>

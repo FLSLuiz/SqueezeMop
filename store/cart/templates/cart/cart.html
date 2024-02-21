@@ -1,0 +1,38 @@
+{% extends 'core/index.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+
+<div class="max-w-lg my-8 mx-auto flex items-center justify-center rounded-xl dark:bg-gray-800 dark:text-white flex-wrap p-6">
+	<h2 class="text-xl font-bold">Your cart items 🛍️</h2>
+		<ul class="products flex flex-col divide-y dark:divide-gray-700">
+			{% for item in cart %}
+				{% include 'cart/partials/cart_item.html' %}
+			{% endfor %}
+		</ul>
+	<div class="space-y-1 text-right font-bold p-4">
+		<p>Total Amount:
+		<span class="font-semibold" 
+			hx-get="{% url 'hx_cart_total' %}" 
+			hx-trigger="update-menu-cart from:body"  
+			hx-swap="innerHTML"
+			>
+				{% include 'cart/partials/cart_total.html' %}€
+		</span>
+		</p>
+	</div>
+	<div class="flex justify-end space-x-4">
+		<a href="{% url 'shop' %}">
+			<button  type="button" class="px-6 py-2 border rounded-md dark:border-violet-400">
+				<span class="sr-only sm:not-sr-only">Back to shop</span>
+			</button>
+		</a>
+		<a href="{% url 'checkout' %}">
+			<button type="button" class="px-6 py-2 border rounded-md dark:bg-violet-400 dark:text-gray-900 dark:border-violet-400">
+				<span class="sr-only sm:not-sr-only">Continue to Checkout</span>
+			</button>
+		</a>
+	</div>
+</div>
+{% endblock %}
